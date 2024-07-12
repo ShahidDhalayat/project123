@@ -1,0 +1,56 @@
+class Queue:
+    def __init__(self):
+        self.queue_ds = []
+        self.front = -1
+        self.rear = -1
+
+    def empty(self):
+        return len(self.queue_ds) == 0
+
+    def enqueue(self, val):
+        self.queue_ds.append(val)
+        if self.front == -1:
+            self.front += 1
+            self.rear += 1
+            print(val, "is successfully inserted")
+        else:
+            self.rear += 1
+            print(val, "is successfully inserted")
+
+    def dequeue(self):
+        if len(self.queue_ds) == 0:
+            print("Queue is empty")
+            return
+        else:
+            temp = self.queue_ds.pop(self.front)
+            print("Deleted item =", temp)
+            self.rear -= 1
+            if len(self.queue_ds) == 0:
+                self.front = -1
+                self.rear = -1
+
+    def display(self):
+        if len(self.queue_ds) == 0:
+            print("Queue is empty")
+            return
+
+        print("The contents of Queue are:")
+        if self.front == self.rear:
+            print(self.queue_ds[self.front], "<-- Front/Rear")
+            return
+
+        print(self.queue_ds[self.front], "<-- Front")
+        i = self.front + 1
+        while i < self.rear:
+            print(self.queue_ds[i])
+            i += 1
+        print(self.queue_ds[self.rear], "<-- Rear")
+
+# Testing the Queue class
+a = Queue()
+a.enqueue(10)
+a.enqueue(20)
+a.enqueue(30)
+a.display()
+a.dequeue()
+a.display()
